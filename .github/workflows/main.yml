@@ -34,13 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps --no-audit --no-fund
 
-      - name: Check build output
-        run: |
-          pwd
-          ls -la
-          find . -maxdepth 4 -type d \( -name dist -o -name public -o -name .output \) -print
-
-     - name: Build website
+      - name: Build website
         run: npm run build
 
       - name: Find build output
@@ -51,13 +45,8 @@ jobs:
           find . -maxdepth 5 -type d \( -name dist -o -name public -o -name .output -o -name build \) -print
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
