@@ -39,8 +39,12 @@ jobs:
 
       - name: Find build output
         run: |
-          echo "=== Root ==="
+          echo "=== Root folders ==="
           ls -la
+          echo "=== Public folder ==="
+          ls -la public || true
+          echo "=== Dist folder ==="
+          ls -la dist || true
           echo "=== Output folders ==="
           find . -maxdepth 5 -type d \( -name dist -o -name public -o -name .output -o -name build \) -print
 
