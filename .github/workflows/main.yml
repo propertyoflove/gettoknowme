@@ -40,10 +40,15 @@ jobs:
           ls -la
           find . -maxdepth 4 -type d \( -name dist -o -name public -o -name .output \) -print
 
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+     - name: Build website
+        run: npm run build
+
+      - name: Find build output
+        run: |
+          echo "=== Root ==="
+          ls -la
+          echo "=== Output folders ==="
+          find . -maxdepth 5 -type d \( -name dist -o -name public -o -name .output -o -name build \) -print
 
   deploy:
     environment:
