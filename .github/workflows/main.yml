@@ -9,24 +9,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Get source code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-     - name: Install dependencies
+      - name: Install dependencies
         run: npm install --no-audit --no-fund
+
       - name: Build website
         run: npm run build
 
       - name: Inspect build output
         run: |
-          echo "=== Root files ==="
           ls -la
-          echo "=== Build folders ==="
-          find . -maxdepth 3 -type d \( -name dist -o -name .output -o -name build \) -print
+          find . -maxdepth 3 -type d -name dist -o -name .output -o -name build
